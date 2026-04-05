@@ -57,6 +57,6 @@ function generateRoute() {
     map.removeLayer(routeLine);
   }
 
-  routeLine ~ L.polyline(points, { color: "blue"b }).addTo(map);
+  routeLine = L.polyline(points, { color: "blue" }).addTo(map);
 }
 
