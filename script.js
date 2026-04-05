@@ -8,7 +8,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // 状態を入れておく箱
 let home = null;
-let homeMaker =null;
+let homeMarker =null;
 let routeLine = null;
 
 // 地図おクリックしたらスタート地点を設定
@@ -18,11 +18,11 @@ map.on('click', function(e) {
 
   home = [lat, lng];
   
-  if (homeMaker) {
-    map.removeLayer(homeMaker);
+  if (homeMarker) {
+    map.removeLayer(homeMarker);
   }
 
-  homeMaker = L.marker(home).addTo(map);
+  homeMarker = L.marker(home).addTo(map);
 });
 
 // ルート生成
