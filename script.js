@@ -53,46 +53,29 @@ function generateRoute() {
   }
 
   // 中心マーカー
-  const centerMarker = L.marker([centerLat, centerLng]).addTo(map);
-  markers.push(centerMarker);
+const centerMarker = L.marker([centerLat, centerLng]).addTo(map);
+markers.push(centerMarker);
 
-  const radius = 0.01;
-  const numPoints = 40;
+const numPoints = 180; // 円周上の点の数を増やせば滑らかな円になる
 
-  const latRad = centerLat * Math.PI / 180;
-  const lngScale = Math.cos(latRad);
+const radiusKm = parseFloat(document.getElementById("radiusInput").value) || 3;
+const radius = radiusKm / 111;
 
-  points = [];
+const latRad = centerLat * Math.PI / 180;
+const lngScale = Math.cos(latRad);
 
-  for (let i = 0; i <= numPoints; i++) {
-    const angle = (i / numPoints) * 2 * Math.PI;
+points = [];
 
-    const lat = centerLat + radius * Math.cos(angle);
-    const lng = centerLng + (radius * Math.sin(angle)) / lngScale;
+for (let i = 0; i <= numPoints; i++) {
+  const angle = (i / numPoints) * 2 * Math.PI;
 
-    points.push([lat, lng]);
-  }
+  const lat = centerLat + radius * Math.cos(angle);
+  const lng = centerLng + (radius * Math.sin(angle)) / lngScale;
 
-  polyline = L.polyline(points, { color: 'blue' }).addTo(map);
+  points.push([lat, lng]);
 }
 
-// 距離を計算
-function getDistance(p1, p2) {
-    const R = 6371; // 地球の半径(km)
-  
-    const dLat = (p2[0] - p1[0]) * Math.PI / 180;
-    const dLng = (p2[1] - p1[1]) * Math.PI / 180;
-  
-    const a =
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(p1[0] * Math.PI/180) *
-      Math.cos(p2[0] * Math.PI/180) *
-      Math.sin(dLng/2) * Math.sin(dLng/2);
-  
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  
-    return R * c;
-  }
+polyline = L.polyline(points, { color: 'blue' }).addTo(map);
 
 // 合計距離を計算
 function getTotalDistance(points) {
@@ -104,6 +87,7 @@ function getTotalDistance(points) {
   
     return total;
 }
+
 
 // 合計距離を計算
 const total = getTotalDistance(points);
