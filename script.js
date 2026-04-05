@@ -38,7 +38,7 @@ function generateRoute() {
   const radiusKm = parseFloat(document.getElementById("radiusInput").value) || 3;
   const radius = radiusKm / 111;
 
-  const numpoints = 180;
+  const numPoints = 180;
   const latRad = centerLat * Math.PI / 180;
   const lngScale = Math.cos(latRad);
   
