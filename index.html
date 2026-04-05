@@ -13,30 +13,31 @@
       padding: 0;
       width: 100%;
     }
-    body {
-      overflow: hidden;
+
+    #routeButton {
+      position: absolute;
+      top: 80px;
+      left: 10px;
+      z-index:1000;
+    }
+
+    "radiusInput{
+      positioin: absolute;
+      top: 120px;
+      left: 10px;
+      z-index: 1000;
+      width: 100px;
     }
   </style>
 </head>
 <body>
+  <button id="routeButton" onclick="generateRoute()">ルート作成</button>
+  <input id="radiusInput" type="number" value="3" placeholder="半径(km)" />
 
-    <button onclick="generateRoute()" style="position:absolute; z-index:1000; top:100px; left:10px;">
-      ルート生成
-    </button>
-
-  　<input
-       type="number"
-       id="radiusInput"
-       placeholder="半径(km)"
-       value="3"
-       style="position:absolute; z-index:1000; top:120px; left:10px; width:100px;"
-    />
+  <div id="map"></div>
   
-    <div id="map"></div>
-  
-    <!-- LeafletのJSを読み込む -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="script.js"></script>
-  
-  </body>
+  <!-- LeafletのJSを読み込む -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
